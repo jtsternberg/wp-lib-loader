@@ -50,7 +50,7 @@ if ( ! class_exists( 'LIBCLASSNAME_010', false ) ) {
 		 * Creates LIBNAMEUPPER_LOADED definition for early detection by
 		 * other scripts.
 		 *
-		 * Hooks LIBCLASSNAME inclusion to the LIBCLASSNAMELOWER_load hook
+		 * Hooks LIBCLASSNAME inclusion to the LIBNAMELOWER_load hook
 		 * on a high priority which decrements (increasing the priority) with
 		 * each version release.
 		 *
@@ -66,10 +66,10 @@ if ( ! class_exists( 'LIBCLASSNAME_010', false ) ) {
 			}
 
 			// Use the hook system to ensure only the newest version is loaded.
-			add_action( 'LIBCLASSNAMELOWER_load', array( $this, 'include_lib' ), self::PRIORITY );
+			add_action( 'LIBNAMELOWER_load', array( $this, 'include_lib' ), self::PRIORITY );
 
 			// Then fire our hook.
-			do_action( 'LIBCLASSNAMELOWER_load', $this );
+			do_action( 'LIBNAMELOWER_load', $this );
 		}
 
 		/**
