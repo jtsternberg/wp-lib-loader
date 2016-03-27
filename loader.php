@@ -33,7 +33,7 @@
  */
 
 /**
- * Loader: https://github.com/jtsternberg/wp-lib-loader
+ * Loader versioning: https://github.com/jtsternberg/wp-lib-loader
  */
 
 if ( ! class_exists( 'LIBCLASSNAME_010', false ) ) {
@@ -84,9 +84,12 @@ if ( ! class_exists( 'LIBCLASSNAME_010', false ) ) {
 			if ( ! defined( 'LIBNAMEUPPER_LOADED' ) ) {
 				/**
 				 * A constant you can use to check if LIBCLASSNAME is loaded
-				 * for your plugins/themes with LIBCLASSNAME dependency
+				 * for your plugins/themes with LIBCLASSNAME dependency.
+				 *
+				 * Can also be used to determine the priority of the hook
+				 * in use for the currently loaded version.
 				 */
-				define( 'LIBNAMEUPPER_LOADED', true );
+				define( 'LIBNAMEUPPER_LOADED', self::PRIORITY );
 			}
 
 			// Use the hook system to ensure only the newest version is loaded.
