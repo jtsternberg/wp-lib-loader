@@ -96,7 +96,7 @@ if ( ! class_exists( 'LIBCLASSNAME_010', false ) ) {
 			add_action( 'LIBNAMELOWER_load', array( $this, 'include_lib' ), self::PRIORITY );
 
 			// Then fire our hook.
-			do_action( 'LIBNAMELOWER_load', $this );
+			do_action( 'LIBNAMELOWER_load' );
 		}
 
 		/**
