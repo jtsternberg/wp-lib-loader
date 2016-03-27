@@ -459,7 +459,7 @@ header h1 {
   width: 540px;
   margin-top: 0;
   margin-bottom: 0.2em;
-  font-size: 72px;
+  font-size: 62px;
   font-weight: normal;
   line-height: 1;
   color: #fff;
@@ -467,7 +467,7 @@ header h1 {
 }
 
 header h2 {
-  width: 540px;
+  width: 450px;
   margin-top: 0;
   margin-bottom: 0;
   font-size: 26px;
@@ -479,7 +479,7 @@ header h2 {
 
 .inner {
   position: relative;
-  width: 940px;
+  width: 720px;
   margin: 0 auto;
 }
 
@@ -489,8 +489,8 @@ header h2 {
 }
 
 #main-content {
-  float: left;
-  width: 690px;
+  float: none;
+  width: 720px;
 }
 
 #main-content img {
@@ -516,7 +516,7 @@ aside#sidebar p.repo-owner a {
   margin-bottom: 40px;
 }
 
-a.button {
+.button {
   width: 134px;
   height: 58px;
   padding-top: 22px;
@@ -526,17 +526,46 @@ a.button {
   line-height: 1.2;
   color: #fff;
 }
-a.button small {
+button.button {
+  border: 0;
+  line-height: 1;
+}
+.button small {
   display: block;
   font-size: 11px;
 }
-header a.button {
+header .button {
   position: absolute;
   top: 0;
   right: 0;
   background: transparent url(../images/github-button.png) 0 0 no-repeat;
 }
-aside a.button {
+.button.get-it {
+  height: auto;
+  padding: 14px 5px 9px;
+  width: 192px;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 20px;
+}
+header .button.get-it {
+  background: #fff;
+  top: 92px;
+  color: #2879d0;
+}
+#main-content .button.get-it {
+  background: #2879d0;
+  color: #fff;
+  /*padding-left: 15px;
+  padding-right: 15px;*/
+  margin: 40px;
+  display: block;
+  margin: 0 auto;
+}
+.center {
+  text-align: center;
+}
+aside .button {
   display: block;
   width: 138px;
   padding-left: 64px;
@@ -730,6 +759,10 @@ ul {
   padding-left: 20px;
 }
 
+.toc ul {
+  margin-bottom: 0;
+}
+
 ol {
   list-style-position: inside;
   list-style: decimal;
@@ -825,7 +858,7 @@ footer a:hover {
   header h2 {
     font-size: 24px;
   }
-  header a.button {
+  header .button {
     position: relative;
     display: inline-block;
     width: auto;
@@ -842,7 +875,7 @@ footer a:hover {
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
   }
-  header a.button small {
+  header .button small {
     display: inline;
     font-size: 13px;
   }
@@ -858,7 +891,7 @@ footer a:hover {
     background-image: none;
     border-top: solid 1px #ddd;
   }
-  aside#sidebar a.button {
+  aside#sidebar .button {
     display: none;
   }
   #main-content h1:before,

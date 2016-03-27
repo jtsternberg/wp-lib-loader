@@ -1,162 +1,153 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+<head>
+	<meta charset='utf-8'>
+	<meta http-equiv="X-UA-Compatible" content="chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+	<link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+	<link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
 
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="javascripts/main.js"></script>
 
     <title>WP Lib Loader by jtsternberg</title>
-  </head>
+ </head>
 
-  <body>
-    <header>
-      <div class="inner">
-        <h1>WP Lib Loader</h1>
-        <h2>Utility template class for smartly loading WordPress code libraries</h2>
-        <a href="https://github.com/jtsternberg/wp-lib-loader" class="button"><small>View project on</small> GitHub</a>
-      </div>
-    </header>
+ <body>
+ 	<header>
+ 		<div class="inner">
+ 			<h1>WP Lib Loader</h1>
+ 			<h2>Utility template class for smartly loading WordPress code libraries</h2>
+ 			<a href="https://github.com/jtsternberg/wp-lib-loader" class="button"><small>View project on</small> GitHub</a>
+ 		</div>
+ 	</header>
 
-    <div id="content-wrapper">
-      <div class="inner clearfix">
-        <section id="main-content">
-<p><a href="https://github.com/jtsternberg/wp-lib-loader/blob/master/loader.php">WP Lib Loader</a> is a handy template class for generating smart loaders for your WordPress code library which eliminates conflicts and the need for <code>function_exists</code> or <code>class_exists</code> checks in your plugins/themes when using the library. This loader was inspired by <a href="https://github.com/WebDevStudios/CMB2/blob/master/init.php#L51-L184">CMB2</a>, and is a proven system. This loader allows any plugin or theme to bundle your library, and only one version (the most up-to-date version) will be loaded by WordPress.</p>
+ 	<div id="content-wrapper">
+ 		<div class="inner clearfix">
+			<section id="main-content">
+				<p><a href="https://github.com/jtsternberg/wp-lib-loader/blob/master/loader.php">WP Lib Loader</a> is a handy template class for generating smart loaders for your WordPress code library which eliminates conflicts and the need for <code>function_exists</code> or <code>class_exists</code> checks in your plugins/themes when using the library. This loader was inspired by <a href="https://github.com/WebDevStudios/CMB2/blob/master/init.php#L51-L184">CMB2</a>, and is a proven system. This loader allows any plugin or theme to bundle your library, and only one version (the most up-to-date version) will be loaded by WordPress.</p>
 
-<p>It accomplishes this through a semi-magical use of the WordPress hooks system combined with unique loader class-names for each version of the library.</p>
+				<p>It accomplishes this through a semi-magical use of the WordPress hooks system combined with unique loader class-names for each version of the library.</p>
 
-<ul>
-<li>
-<a href="#getting-started">Getting Started</a>
+				<ul class="toc">
+					<li>
+						<a href="#getting-started">Getting Started</a>
 
-<ul>
-<li><a href="#the-resulting-file">Example File</a></li>
-</ul>
-</li>
-<li>
-<a href="#how-to-version-your-library">How to version your library</a>
+						<ul>
+							<li><a href="#the-resulting-file">Example File</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#how-to-version-your-library">How to version your library</a>
 
-<ul>
-<li><a href="#the-resulting-file-after-bumping-the-version">Example File (version 0.1.1)</a></li>
-</ul>
-</li>
-<li><a href="#addtional-details">Addtional details</a></li>
-<li><a href="#super-important-caveats">Super important caveats</a></li>
-</ul>
+						<ul>
+							<li><a href="#the-resulting-file-after-bumping-the-version">Example File (version 0.1.1)</a></li>
+						</ul>
+					</li>
+					<li><a href="#addtional-details">Addtional details</a></li>
+					<li><a href="#super-important-caveats">Super important caveats</a></li>
+				</ul>
 
-<h2>
-<a id="getting-started" class="anchor" href="#getting-started" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Getting Started</h2>
+				<h2><a id="getting-started" class="anchor" href="#getting-started" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Getting Started</h2>
 
-<p>(Until I get a chance to build an automated tool), to use this template, you will need to copy the contents of the <a href="https://github.com/jtsternberg/wp-lib-loader/blob/master/loader.php"><code>loader.php</code></a> file to your library and then complete a five-step find and replace on the file. For example, if your lbrary is named <strong><em>WP_Magic</em></strong>:</p>
+				<p>This template works by copying the contents of the <a href="https://github.com/jtsternberg/wp-lib-loader/blob/master/loader.php"><code>loader.php</code></a> file completing a five-step find and replace on the file. For example, if your lbrary is named <strong><em>WP_Magic</em></strong>:</p>
 
-<ol>
-<li>Search for <code>LIBCLASSNAME</code> and replace with your library's class-name: <code>WP_Magic</code>.</li>
-<li>Search for <code>LIBNAMEUPPER</code> and replace with your library's class-name, upppercased (for constants): <code>WP_MAGIC</code>.</li>
-<li>Search for <code>LIBNAMELOWER</code> and replace with your library's class-name, lowercased (for hook names): <code>wp_magic</code>.</li>
-<li>Search for <code>LIBURL</code> and replace with your library's URL: <code>https://wp_magic.io</code>.</li>
-<li>Search for <code>AUTHORNAME</code> and replace with your name: <code>John Doe</code>.</li>
-<li>Search for <code>AUTHOREMAIL</code> and replace with your email: <code>john@johndoe.com</code>.</li>
-</ol>
+				<ol>
+					<li>Search for <code>LIBCLASSNAME</code> and replace with your library's class-name: <code>WP_Magic</code>.</li>
+					<li>Search for <code>LIBNAMEUPPER</code> and replace with your library's class-name, upppercased (for constants): <code>WP_MAGIC</code>.</li>
+					<li>Search for <code>LIBNAMELOWER</code> and replace with your library's class-name, lowercased (for hook names): <code>wp_magic</code>.</li>
+					<li>Search for <code>LIBURL</code> and replace with your library's URL: <code>https://wp_magic.io</code>.</li>
+					<li>Search for <code>AUTHORNAME</code> and replace with your name: <code>John Doe</code>.</li>
+					<li>Search for <code>AUTHOREMAIL</code> and replace with your email: <code>john@johndoe.com</code>.</li>
+				</ol>
 
-<h4>
-<a id="the-resulting-file" class="anchor" href="#the-resulting-file" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>The resulting file:</h4>
+				<h4><a id="the-resulting-file" class="anchor" href="#the-resulting-file" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>The resulting file:</h4>
 
-<p><a href="https://github.com/jtsternberg/wp-lib-loader/blob/master/examples/wp-magic.php">examples/wp-magic.php</a></p>
+				<p><a href="https://github.com/jtsternberg/wp-lib-loader/blob/master/examples/wp-magic.php">examples/wp-magic.php</a></p>
 
-<h2>
-<a id="how-to-version-your-library" class="anchor" href="#how-to-version-your-library" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to version your library</h2>
+				<h2><a id="how-to-version-your-library" class="anchor" href="#how-to-version-your-library" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to version your library</h2>
 
-<p>Since the real magic of this loader is when you release a new version, let me explain that process. Let's say you're looking to release a bug-fix for <strong><em>WP_Magic</em></strong>.</p>
+				<p>Since the real magic of this loader is when you release a new version, let me explain that process. Let's say you're looking to release a bug-fix for <strong><em>WP_Magic</em></strong>.</p>
 
-<ol>
-<li>
-<p>Increase your version numbers to <code>0.1.1</code>.</p>
+				<ol>
+					<li>
+						<p>Increase your version numbers to <code>0.1.1</code>.</p>
 
-<ul>
-<li>
-<p>Replace the <code>0.1.0</code> for the <code>@version</code> docblocks.</p>
+						<ul>
+							<li>
+								<p>Replace the <code>0.1.0</code> for the <code>@version</code> docblocks.</p>
 
-<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-k">*</span> <span class="pl-k">@</span><span class="pl-c1">version</span>  <span class="pl-c1">0.1</span><span class="pl-k">.</span><span class="pl-c1">1</span></span></pre></div>
-</li>
-<li>
-<p>Replace the <code>0.1.0</code> for the <code>VERSION</code> constant.</p>
+								<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-k">*</span> <span class="pl-k">@</span><span class="pl-c1">version</span>  <span class="pl-c1">0.1</span><span class="pl-k">.</span><span class="pl-c1">1</span></span></pre></div>
+							</li>
+							<li>
+								<p>Replace the <code>0.1.0</code> for the <code>VERSION</code> constant.</p>
 
-<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-k">const</span> <span class="pl-c1">VERSION</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>0.1.1<span class="pl-pds">'</span></span>;</span></pre></div>
-</li>
-</ul>
-</li>
-<li>Update the loader class-name from <code>WP_Magic_010</code> to <code>WP_Magic_011</code>.</li>
-<li>
-<p><strong>MOST IMPORTANT:</strong> Decrement the <code>PRIORITY</code> constant.</p>
+								<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-k">const</span> <span class="pl-c1">VERSION</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>0.1.1<span class="pl-pds">'</span></span>;</span></pre></div>
+							</li>
+						</ul>
+					</li>
+					<li>Update the loader class-name from <code>WP_Magic_010</code> to <code>WP_Magic_011</code>.</li>
+					<li>
+						<p><strong>MOST IMPORTANT:</strong> Decrement the <code>PRIORITY</code> constant.</p>
 
-<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-k">const</span> <span class="pl-c1">PRIORITY</span> <span class="pl-k">=</span> <span class="pl-c1">9998</span>;</span></pre></div>
-</li>
-</ol>
+						<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-k">const</span> <span class="pl-c1">PRIORITY</span> <span class="pl-k">=</span> <span class="pl-c1">9998</span>;</span></pre></div>
+					</li>
+				</ol>
 
-<p><strong>That's it!</strong> That's all there is to releasing a new version! You can now be sure that this will be the version used if multiple copies of the library exist.</p>
+				<p><strong>That's it!</strong> That's all there is to releasing a new version! You can now be sure that this will be the version used if multiple copies of the library exist.</p>
 
-<h4>
-<a id="the-resulting-file-after-bumping-the-version" class="anchor" href="#the-resulting-file-after-bumping-the-version" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>The resulting file after bumping the version:</h4>
+				<h4><a id="the-resulting-file-after-bumping-the-version" class="anchor" href="#the-resulting-file-after-bumping-the-version" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>The resulting file after bumping the version:</h4>
 
-<p><a href="https://github.com/jtsternberg/wp-lib-loader/blob/master/examples/wp-magic-version-011.php">examples/wp-magic-version-011.php</a></p>
+				<p><a href="https://github.com/jtsternberg/wp-lib-loader/blob/master/examples/wp-magic-version-011.php">examples/wp-magic-version-011.php</a></p>
 
-<h2>
-<a id="addtional-details" class="anchor" href="#addtional-details" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Addtional details</h2>
+				<h2><a id="addtional-details" class="anchor" href="#addtional-details" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Addtional details</h2>
 
-<ul>
-<li><p>The loader assumes your main library class (e.g. <code>WP_Magic</code>) exists in the <code>lib/init.php</code> file. Obviously, if that is not the case with your library, you will need to updat the <code>require_once</code> line.</p></li>
-<li>
-<p>The loader provides 3 useful constants:</p>
+				<ul>
+					<li><p>The loader assumes your main library class (e.g. <code>WP_Magic</code>) exists in the <code>lib/init.php</code> file. Obviously, if that is not the case with your library, you will need to updat the <code>require_once</code> line.</p></li>
+					<li>
+						<p>The loader provides 3 useful constants:</p>
 
-<ul>
-<li><p><code>LIBNAMEUPPER_LOADED</code> (e.g. <code>WP_MAGIC_LOADED</code>) - A constant set right away which dependent plugins/themes can use to determine if your library is loaded (vs <code>function_exists</code> or <code>class_exists</code> checks). This constant can also be used to determine the priority of the hook in use for the currently loaded version.</p></li>
-<li><p><code>LIBNAMEUPPER_VERSION</code> (e.g. <code>WP_MAGIC_VERSION</code>) - Defines the loaded version of your library so dependent plugins/themes have a way to conditionally load features.</p></li>
-<li><p><code>LIBNAMEUPPER_DIR</code> (e.g. <code>WP_MAGIC_DIR</code>) - Defines the directory of the loaded version of your library. Can be useful determining the location of the library when debugging and multiple copies of the library exist in the system.</p></li>
-</ul>
-</li>
-<li>
-<p>The loader provides a useful hook, <code>'LIBNAMELOWER_load'</code> (e.g. <code>'wp_magic_load'</code>), which can be used for hooking in your dependent functionality. In order to ensure your hook loads <em>after</em> the library is loaded, you will need to use the <code>LIBNAMEUPPER_LOADED</code> (e.g. <code>WP_MAGIC_LOADED</code>) constant when hooking in:</p>
+						<ul>
+							<li><p><code>LIBNAMEUPPER_LOADED</code> (e.g. <code>WP_MAGIC_LOADED</code>) - A constant set right away which dependent plugins/themes can use to determine if your library is loaded (vs <code>function_exists</code> or <code>class_exists</code> checks). This constant can also be used to determine the priority of the hook in use for the currently loaded version.</p></li>
+							<li><p><code>LIBNAMEUPPER_VERSION</code> (e.g. <code>WP_MAGIC_VERSION</code>) - Defines the loaded version of your library so dependent plugins/themes have a way to conditionally load features.</p></li>
+							<li><p><code>LIBNAMEUPPER_DIR</code> (e.g. <code>WP_MAGIC_DIR</code>) - Defines the directory of the loaded version of your library. Can be useful determining the location of the library when debugging and multiple copies of the library exist in the system.</p></li>
+						</ul>
+					</li>
+					<li>
+						<p>The loader provides a useful hook, <code>'LIBNAMELOWER_load'</code> (e.g. <code>'wp_magic_load'</code>), which can be used for hooking in your dependent functionality. In order to ensure your hook loads <em>after</em> the library is loaded, you will need to use the <code>LIBNAMEUPPER_LOADED</code> (e.g. <code>WP_MAGIC_LOADED</code>) constant when hooking in:</p>
 
 <div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-k">if</span> ( <span class="pl-c1">defined</span>( <span class="pl-s"><span class="pl-pds">'</span>WP_MAGIC_LOADED<span class="pl-pds">'</span></span> ) ) {</span>
 <span class="pl-s1">  <span class="pl-c">// Hook in after WP_Magic and add our functionality</span></span>
 <span class="pl-s1">  add_action( <span class="pl-s"><span class="pl-pds">'</span>wp_magic_load<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>my_plugin_dependent_functionality<span class="pl-pds">'</span></span>, ( <span class="pl-c1">WP_MAGIC_LOADED</span> <span class="pl-k">+</span> <span class="pl-c1">1</span> ) );</span>
 <span class="pl-s1">}</span></pre></div>
-</li>
-</ul>
+					</li>
+				</ul>
 
-<h2>
-<a id="super-important-caveats" class="anchor" href="#super-important-caveats" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Super important caveats</h2>
+				<h2><a id="super-important-caveats" class="anchor" href="#super-important-caveats" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Super important caveats</h2>
 
-<ul>
-<li><p>This loader only works if you are <strong>100% committed to backwards-compatibility</strong> (like WordPress). This is mandataory because only <em>one</em> instance of the library will be loaded, and will be whichever instance is the most recent (version). If you change a function, hook name, or properties passed into your library hooks, there is a very real chance you will break the plugins/themes which depend on your library. For this reason, you need to take great consideration when developing your public API, i.e. the parts of the library to be exposed for use.</p></li>
-<li><p>When releasing a new version, it's extremely important to follow <a href="#how-to-version-your-library">the versioning instructions</a> or this loader will be useless.</p></li>
-</ul>
-        </section>
+				<ul>
+					<li><p>This loader only works if you are <strong>100% committed to backwards-compatibility</strong> (like WordPress). This is mandataory because only <em>one</em> instance of the library will be loaded, and will be whichever instance is the most recent (version). If you change a function, hook name, or properties passed into your library hooks, there is a very real chance you will break the plugins/themes which depend on your library. For this reason, you need to take great consideration when developing your public API, i.e. the parts of the library to be exposed for use.</p></li>
+					<li><p>When releasing a new version, it's extremely important to follow <a href="#how-to-version-your-library">the versioning instructions</a> or this loader will be useless.</p></li>
+				</ul>
 
-        <aside id="sidebar">
-          <a href="https://github.com/jtsternberg/wp-lib-loader/zipball/master" class="button">
-            <small>Download</small>
-            .zip file
-          </a>
-          <a href="https://github.com/jtsternberg/wp-lib-loader/tarball/master" class="button">
-            <small>Download</small>
-            .tar.gz file
-          </a>
+				<hr>
+				<p class="center"><span class="generator-button"></span></p>
+				<hr>
+			</section>
 
-          <p class="repo-owner"><a href="https://github.com/jtsternberg/wp-lib-loader"></a> is maintained by <a href="https://github.com/jtsternberg">jtsternberg</a>.</p>
+			<aside>
+				<p class="repo-owner"><a href="https://github.com/jtsternberg/wp-lib-loader">WP Lib Loader</a> is maintained by <a href="https://github.com/jtsternberg">jtsternberg</a>.</p>
 
-          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
-        </aside>
-      </div>
-    </div>
+				<p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+			</aside>
+		</div>
+	</div>
 
 
-  </body>
+</body>
 </html>
