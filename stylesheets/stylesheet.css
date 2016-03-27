@@ -875,7 +875,7 @@ footer a:hover {
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
   }
-  header .get-it.button {
+  header .button.get-it {
     top: 0;
   }
   header .button small {
