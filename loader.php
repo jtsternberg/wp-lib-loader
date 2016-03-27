@@ -33,7 +33,7 @@
  */
 
 /**
- * Loader versioning: https://github.com/jtsternberg/wp-lib-loader
+ * Loader versioning: http://jtsternberg.github.io/wp-lib-loader/
  */
 
 if ( ! class_exists( 'LIBCLASSNAME_010', false ) ) {
