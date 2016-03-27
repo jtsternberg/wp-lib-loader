@@ -72,8 +72,10 @@ Since the real magic of this loader is when you release a new version, let me ex
 * The loader provides a useful hook, `'LIBNAMELOWER_load'` (e.g. `'wp_magic_load'`), which can be used for hooking in your dependent functionality. In order to ensure your hook loads _after_ the library is loaded, you will need to use the `LIBNAMEUPPER_LOADED` (e.g. `WP_MAGIC_LOADED`) constant when hooking in:
 	```php
 	if ( defined( 'WP_MAGIC_LOADED' ) ) {
+      // Need to hook AFTER the lib.
+      $priority = ( WP_MAGIC_LOADED + 1 );
       // Hook in after WP_Magic and add our functionality
-      add_action( 'wp_magic_load', 'my_plugin_dependent_functionality', ( WP_MAGIC_LOADED + 1 ) );
+      add_action( 'wp_magic_load', 'plugin_dependent_function', $priority );
 	}
 	```
 
