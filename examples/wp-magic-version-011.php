@@ -10,7 +10,7 @@
  * @copyright 2016 John Doe <john@johndoe.com>
  * @license   GPL-2.0+
  * @version   0.1.1
- * @link      https://wp_magic.io
+ * @link      https://wp-magic.io
  * @since     0.1.0
  */
 
@@ -33,7 +33,7 @@
  */
 
 /**
- * Loader versioning: https://github.com/jtsternberg/wp-lib-loader
+ * Loader versioning: http://jtsternberg.github.io/wp-lib-loader/
  */
 
 if ( ! class_exists( 'WP_Magic_011', false ) ) {
@@ -48,7 +48,7 @@ if ( ! class_exists( 'WP_Magic_011', false ) ) {
 	 * @author   John Doe <john@johndoe.com>
 	 * @license  GPL-2.0+
 	 * @version  0.1.1
-	 * @link     https://wp_magic.io
+	 * @link     https://wp-magic.io
 	 * @since    0.1.0
 	 */
 	class WP_Magic_011 {
