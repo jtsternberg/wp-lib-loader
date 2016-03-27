@@ -2,7 +2,7 @@
 ### [jtsternberg.github.io/wp-lib-loader](http://jtsternberg.github.io/wp-lib-loader)
 > Utility template class for smartly loading WordPress code libraries.
 
-This is a handy template class for generating smart loaders for your WordPress code library which eliminates conflicts and the need for `function_exists` or `class_exists` checks in your plugins/themes when using the library. This loader was inspired by [CMB2](https://github.com/WebDevStudios/CMB2/blob/master/init.php#L51-L184), and is a proven system. It allows any plugin or theme to bundle your library, and only one version (the most up-to-date version) will be loaded by WordPress.
+This is a handy template class for generating smart loaders for your WordPress code libraries and eliminates conflicts and the need for `function_exists` or `class_exists` checks in your plugins/themes when including the bundled library. This loader was inspired by [CMB2](https://github.com/WebDevStudios/CMB2/blob/master/init.php#L51-L184), and is a proven system. It allows any plugin or theme to bundle your library, and only one instance (the most up-to-date version) will be loaded by WordPress.
 
 It accomplishes this through a semi-magical use of the WordPress hooks system combined with unique loader class-names for each version of the library.
 
