@@ -70,7 +70,7 @@ window.WPLibLoader = window.WPLibLoader || {};
 			loader = loader.replace( regex, replacement );
 		} );
 
-		console.warn('download!');
+		alert( 'Success! Your loader will now download.');
 
 		this.href = 'data:text/plain;charset=UTF-8,' + encodeURIComponent( loader );
 	};
