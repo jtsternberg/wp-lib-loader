@@ -67,31 +67,34 @@ Since the real magic of this loader is when you release a new version, let's wal
 * The loader provides 3 useful constants:
 	* `LIBNAMEUPPER_LOADED` (e.g. `WP_MAGIC_LOADED`) - A constant set right away which dependent plugins/themes can use to determine if your library is loaded (vs `function_exists` or `class_exists` checks). This constant can also be used to determine the priority of the hook in use for the currently loaded version.
 
-	* `LIBNAMEUPPER_VERSION` (e.g. `WP_MAGIC_VERSION`) - Defines the loaded version of your library so dependent plugins/themes have a way to conditionally load features.
+	* `LIBNAMEUPPER_VERSION` (e.g. `WP_MAGIC_VERSION`) - Defines the loaded version of your library so dependent plugins/themes have a way to conditionally load features, if needed.
 
-	* `LIBNAMEUPPER_DIR` (e.g. `WP_MAGIC_DIR`) - Defines the directory of the loaded version of your library. Can be useful determining the location of the library when debugging and multiple copies of the library exist in the system.
+	* `LIBNAMEUPPER_DIR` (e.g. `WP_MAGIC_DIR`) - Defines the directory of the loaded version of your library. Can be useful for determining the location of the library when debugging and multiple copies of the library exist in the system.
 
-* The loader provides a useful hook, `'LIBNAMELOWER_load'` (e.g. `'wp_magic_load'`), which can be used for hooking in your dependent functionality. In order to ensure your hook loads _after_ the library is loaded, you will need to use the `LIBNAMEUPPER_LOADED` (e.g. `WP_MAGIC_LOADED`) constant when hooking in:
+* The loader provides a useful hook, `'LIBNAMELOWER_load'` (e.g. `'wp_magic_load'`), which can be used for hooking in your dependent functionality. To ensure your hook loads _after_ the library is loaded, you will need to use the `LIBNAMEUPPER_LOADED` (e.g. `WP_MAGIC_LOADED`) constant when hooking in:
 	```php
 	if ( defined( 'WP_MAGIC_LOADED' ) ) {
 
       // Need to hook AFTER the lib.
       $priority = ( WP_MAGIC_LOADED + 1 );
       
-      // And add our functionality.
-      add_action( 'wp_magic_load', 'plugin_dependent_function', $priority );
+      // And add the functionality.
+      add_action( 'wp_magic_load', 'my_magic', $priority );
 	}
 	```
+* _Keep in mind_, the loader includes the library on the first WordPress hook available to it, `'muplugins_loaded'`, `'plugins_loaded'`, or `'after_setup_theme'`.
+
 
 ## Super important caveats
 
-* This loader only works if you are **100% committed to backwards-compatibility** (like WordPress). This is mandatory because only _one_ instance of the library will be loaded, and will be whichever instance is the most recent (version). If you change a function, hook name, or properties passed into your library hooks, there is a very real chance you will break the plugins/themes which depend on your library. For this reason, you need to take great consideration when developing your public API, i.e. the parts of the library to be exposed for use.
+* This loader only works if you are **100% committed to backwards-compatibility** (like WordPress). This is mandatory because only _one_ instance of the library will be loaded, and will be whichever instance is the most recent (version). If you change a function, hook name, or properties passed into your library hooks, there is a very real chance you will break the plugins/themes which depend on your library. For this reason, you need to take great consideration when developing your public API, i.e. the parts of the library to be exposed for public use.
 
 * When releasing a new version, it's extremely important to follow [the versioning instructions](#how-to-version-your-library) or this loader will be useless.
 
 ## Examples in the wild
 
+* [WordPress Shortcode Button](https://github.com/jtsternberg/Shortcode_Button/blob/master/shortcode-button.php)
 * [CMB2-User-Select](https://github.com/WebDevStudios/CMB2-User-Select/blob/master/cmb2-user-select.php)
 * [CMB2 Post Search field](https://github.com/WebDevStudios/CMB2-Post-Search-field/blob/master/cmb2_post_search_field.php)
-* [CMB2 Attached Posts Field](https://github.com/WebDevStudios/cmb2-attached-posts)
+* [CMB2 Attached Posts Field](https://github.com/WebDevStudios/cmb2-attached-posts/blob/master/cmb2-attached-posts-field.php)
 * [&#8230; Add yours!](https://twitter.com/intent/tweet?text=%40jtsternberg%20I%27m%20using%20WP%20Lib%20Loader!&source=webclient)
