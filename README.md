@@ -97,4 +97,5 @@ Since the real magic of this loader is when you release a new version, let's wal
 * [CMB2-User-Select](https://github.com/WebDevStudios/CMB2-User-Select/blob/master/cmb2-user-select.php)
 * [CMB2 Post Search field](https://github.com/WebDevStudios/CMB2-Post-Search-field/blob/master/cmb2_post_search_field.php)
 * [CMB2 Attached Posts Field](https://github.com/WebDevStudios/cmb2-attached-posts/blob/master/cmb2-attached-posts-field.php)
+* [CMB2 Related Links](https://github.com/jtsternberg/CMB2-Related-Links/blob/master/cmb2-related-links.php)
 * [&#8230; Add yours!](https://twitter.com/intent/tweet?text=%40jtsternberg%20I%27m%20using%20WP%20Lib%20Loader!&source=webclient)
