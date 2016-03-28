@@ -95,6 +95,20 @@ if ( ! class_exists( 'LIBCLASSNAME_010', false ) ) {
 			// Use the hook system to ensure only the newest version is loaded.
 			add_action( 'LIBNAMELOWER_load', array( $this, 'include_lib' ), self::PRIORITY );
 
+			/*
+			 * Hook in to after_setup_theme, the first available hook
+			 * to all plugins/themes
+			 */
+			add_action( 'after_setup_theme', array( $this, 'do_hook' ) );
+		}
+
+		/**
+		 * Fires the LIBNAMELOWER_load action hook
+		 * (from the after_setup_theme hook).
+		 *
+		 * @since 0.1.0
+		 */
+		public function do_hook() {
 			// Then fire our hook.
 			do_action( 'LIBNAMELOWER_load' );
 		}
