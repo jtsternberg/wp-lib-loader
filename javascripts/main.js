@@ -4,6 +4,7 @@ window.WPLibLoader = window.WPLibLoader || {};
 	'use strict';
 
 	app.button = '<a href="https://raw.githubusercontent.com/jtsternberg/wp-lib-loader/master/loader.php" class="get-it button" download="loader.php">Generate Loader!</a>';
+	app.codeURL = 'https://raw.githubusercontent.com/jtsternberg/wp-lib-loader/master/loader.php?d=3-27-16';
 	app.code = '';
 
 	app.questions = {
@@ -30,7 +31,7 @@ window.WPLibLoader = window.WPLibLoader || {};
 	};
 
 	app.getCode = function() {
-		$.get( 'https://raw.githubusercontent.com/jtsternberg/wp-lib-loader/master/loader.php', function( data ) {
+		$.get( app.codeURL, function( data ) {
 			app.code = data;
 		} );
 	};
