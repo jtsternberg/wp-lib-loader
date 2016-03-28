@@ -482,6 +482,10 @@ header h2 {
   letter-spacing: 0;
 }
 
+.hidden {
+  display: none;
+}
+
 .inner {
   position: relative;
   width: 720px;
@@ -522,14 +526,14 @@ aside#sidebar p.repo-owner a {
 }
 
 .button {
-  width: 134px;
-  height: 58px;
-  padding-top: 22px;
-  padding-left: 68px;
   font-family: 'Architects Daughter', 'Helvetica Neue', Helvetica, Arial, serif;
   font-size: 23px;
   line-height: 1.2;
   color: #fff;
+  display: inline-block;
+}
+.button.hidden {
+  display: none;
 }
 button.button {
   border: 0;
@@ -544,28 +548,35 @@ header .button {
   top: 0;
   right: 0;
   background: transparent url(../images/github-button.png) 0 0 no-repeat;
+  width: 134px;
+  height: 58px;
+  padding-top: 22px;
+  padding-left: 68px;
+  margin: 0;
 }
-.button.get-it {
+#main-content .button, .button.get-it {
   height: auto;
   padding: 14px 5px 9px;
-  width: 192px;
   border-radius: 5px;
-  text-align: center;
   font-size: 20px;
+  width: auto;
+}
+.button.get-it {
+  text-align: center;
+  margin: 0 auto;
+  width: 192px;
 }
 header .button.get-it {
   background: #fff;
   top: 92px;
   color: #2879d0;
 }
-#main-content .button.get-it {
+#main-content .button {
   background: #2879d0;
   color: #fff;
   /*padding-left: 15px;
   padding-right: 15px;*/
-  margin: 40px;
-  display: block;
-  margin: 0 auto;
+  padding: 10px 20px 8px;
 }
 .center {
   text-align: center;
@@ -593,7 +604,7 @@ code {
 }
 
 pre {
-  padding: 20px;
+  padding: 20px 10px;
   overflow: auto;
   text-shadow: none;
   background: #fff;
@@ -764,7 +775,8 @@ ul {
   padding-left: 20px;
 }
 
-.toc ul {
+/* For now, the TOC is the first unorderd list in the README */
+.toc ul, #main-content ul:first-of-type ul {
   margin-bottom: 0;
 }
 
