@@ -44,16 +44,18 @@ window.WPLibLoader = window.WPLibLoader || {};
 		}
 
 		var replacements = {};
+		var bail = false;
 
 		$.each( app.questions, function( replace, question ) {
 			if ( question ) {
 				if ( ! app.ask( replacements, replace, question ) ) {
+					bail = true;
 					return false;
 				}
 			}
 		} );
 
-		if ( ! replacements.LIBCLASSNAME ) {
+		if ( ! replacements.LIBCLASSNAME || bail ) {
 			return evt.preventDefault();
 		}
 
@@ -67,6 +69,8 @@ window.WPLibLoader = window.WPLibLoader || {};
 			regex = new RegExp( replace, 'gm');
 			loader = loader.replace( regex, replacement );
 		} );
+
+		console.warn('download!');
 
 		this.href = 'data:text/plain;charset=UTF-8,' + encodeURIComponent( loader );
 	};
