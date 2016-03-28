@@ -115,35 +115,39 @@
 
 						<ul>
 							<li><p><code>LIBNAMEUPPER_LOADED</code> (e.g. <code>WP_MAGIC_LOADED</code>) - A constant set right away which dependent plugins/themes can use to determine if your library is loaded (vs <code>function_exists</code> or <code>class_exists</code> checks). This constant can also be used to determine the priority of the hook in use for the currently loaded version.</p></li>
-							<li><p><code>LIBNAMEUPPER_VERSION</code> (e.g. <code>WP_MAGIC_VERSION</code>) - Defines the loaded version of your library so dependent plugins/themes have a way to conditionally load features.</p></li>
-							<li><p><code>LIBNAMEUPPER_DIR</code> (e.g. <code>WP_MAGIC_DIR</code>) - Defines the directory of the loaded version of your library. Can be useful determining the location of the library when debugging and multiple copies of the library exist in the system.</p></li>
+							<li><p><code>LIBNAMEUPPER_VERSION</code> (e.g. <code>WP_MAGIC_VERSION</code>) - Defines the loaded version of your library so dependent plugins/themes have a way to conditionally load features, if needed.</p></li>
+							<li><p><code>LIBNAMEUPPER_DIR</code> (e.g. <code>WP_MAGIC_DIR</code>) - Defines the directory of the loaded version of your library. Can be useful for determining the location of the library when debugging and multiple copies of the library exist in the system.</p></li>
 						</ul>
 					</li>
 					<li>
-						<p>The loader provides a useful hook, <code>'LIBNAMELOWER_load'</code> (e.g. <code>'wp_magic_load'</code>), which can be used for hooking in your dependent functionality. In order to ensure your hook loads <em>after</em> the library is loaded, you will need to use the <code>LIBNAMEUPPER_LOADED</code> (e.g. <code>WP_MAGIC_LOADED</code>) constant when hooking in:</p>
+						<p>The loader provides a useful hook, <code>'LIBNAMELOWER_load'</code> (e.g. <code>'wp_magic_load'</code>), which can be used for hooking in your dependent functionality. To ensure your hook loads <em>after</em> the library is loaded, you will need to use the <code>LIBNAMEUPPER_LOADED</code> (e.g. <code>WP_MAGIC_LOADED</code>) constant when hooking in:</p>
 
 <div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-k">if</span> ( <span class="pl-c1">defined</span>( <span class="pl-s"><span class="pl-pds">'</span>WP_MAGIC_LOADED<span class="pl-pds">'</span></span> ) ) {</span>
 <br><span class="pl-s1">  <span class="pl-c">// Need to hook AFTER the lib.</span></span>
 <span class="pl-s1">  <span class="pl-smi">$priority</span> <span class="pl-k">=</span> ( <span class="pl-c1">WP_MAGIC_LOADED</span> <span class="pl-k">+</span> <span class="pl-c1">1</span> );</span>
-<br><span class="pl-s1">  <span class="pl-c">// And add our functionality.</span></span>
-<span class="pl-s1">  add_action( <span class="pl-s"><span class="pl-pds">'</span>wp_magic_load<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>plugin_dependent_function<span class="pl-pds">'</span></span>, <span class="pl-smi">$priority</span> );</span>
+<br><span class="pl-s1">  <span class="pl-c">// And add the functionality.</span></span>
+<span class="pl-s1">  add_action( <span class="pl-s"><span class="pl-pds">'</span>wp_magic_load<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>my_magic<span class="pl-pds">'</span></span>, <span class="pl-smi">$priority</span> );</span>
 <span class="pl-s1">}</span></pre></div>
+					</li>
+					<li>
+						<p><em>Keep in mind</em>, the loader includes the library on the first WordPress hook available to it, <code>'muplugins_loaded'</code>, <code>'plugins_loaded'</code>, or <code>'after_setup_theme'</code>.</p>
 					</li>
 				</ul>
 
 				<h2><a id="super-important-caveats" class="anchor" href="#super-important-caveats" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Super important caveats</h2>
 
 				<ul>
-					<li><p>This loader only works if you are <strong>100% committed to backwards-compatibility</strong> (like WordPress). This is mandatory because only <em>one</em> instance of the library will be loaded, and will be whichever instance is the most recent (version). If you change a function, hook name, or properties passed into your library hooks, there is a very real chance you will break the plugins/themes which depend on your library. For this reason, you need to take great consideration when developing your public API, i.e. the parts of the library to be exposed for use.</p></li>
+					<li><p>This loader only works if you are <strong>100% committed to backwards-compatibility</strong> (like WordPress). This is mandatory because only <em>one</em> instance of the library will be loaded, and will be whichever instance is the most recent (version). If you change a function, hook name, or properties passed into your library hooks, there is a very real chance you will break the plugins/themes which depend on your library. For this reason, you need to take great consideration when developing your public API, i.e. the parts of the library to be exposed for public use.</p></li>
 					<li><p>When releasing a new version, it's extremely important to follow <a href="#how-to-version-your-library">the versioning instructions</a> or this loader will be useless.</p></li>
 				</ul>
 
 				<h2><a id="user-content-examples-in-the-wild" class="anchor" href="#user-content-examples-in-the-wild" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Examples in the wild</h2>
 
 				<ul>
+					<li><a href="https://github.com/jtsternberg/Shortcode_Button/blob/master/shortcode-button.php">WordPress Shortcode Button</a></li>
 					<li><a href="https://github.com/WebDevStudios/CMB2-User-Select/blob/master/cmb2-user-select.php">CMB2-User-Select</a></li>
 					<li><a href="https://github.com/WebDevStudios/CMB2-Post-Search-field/blob/master/cmb2_post_search_field.php">CMB2 Post Search field</a></li>
-					<li><a href="https://github.com/WebDevStudios/cmb2-attached-posts">CMB2 Attached Posts Field</a></li>
+					<li><a href="https://github.com/WebDevStudios/cmb2-attached-posts/blob/master/cmb2-attached-posts-field.php">CMB2 Attached Posts Field</a></li>
 					<li><a href="https://twitter.com/intent/tweet?text=%40jtsternberg%20I%27m%20using%20WP%20Lib%20Loader!&source=webclient" target="_blank">&#8230; Add yours!</a></li>
 				</ul>
 
