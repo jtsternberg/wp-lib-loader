@@ -30,7 +30,7 @@
  	<div id="content-wrapper">
  		<div class="inner clearfix">
 			<section id="main-content">
-				<p><a href="https://github.com/jtsternberg/wp-lib-loader/blob/master/loader.php">WP Lib Loader</a> is a handy template class for generating smart loaders for your WordPress code library and eliminates conflicts and the need for <code>function_exists</code> or <code>class_exists</code> checks in your plugins/themes when including the bundled library. This loader was inspired by <a href="https://github.com/WebDevStudios/CMB2/blob/master/init.php#L51-L184">CMB2</a>, and is a proven system. It allows any plugin or theme to bundle your library, and only one instance (the most up-to-date version) will be loaded by WordPress.</p>
+				<p><a href="https://github.com/jtsternberg/wp-lib-loader/blob/master/loader.php">WP Lib Loader</a> is a handy template class for generating smart loaders for your WordPress code library and eliminates conflicts and the need for <code>function_exists</code> or <code>class_exists</code> checks in your plugins/themes when including the bundled library. This loader was inspired by <a href="https://github.com/WebDevStudios/CMB2/blob/v2.2.1/init.php#L51-L184">CMB2</a>, and is a proven system. It allows any plugin or theme to bundle your library, and only one instance (the most up-to-date version) will be loaded by the system.</p>
 
 				<p>It accomplishes this through a semi-magical use of the WordPress hooks system combined with unique loader class-names for each version of the library.</p>
 
@@ -49,21 +49,21 @@
 							<li><a href="#the-resulting-file-after-bumping-the-version">Example File (version 0.1.1)</a></li>
 						</ul>
 					</li>
-					<li><a href="#addtional-details">Addtional details</a></li>
+					<li><a href="#additional-details">Additional details</a></li>
 					<li><a href="#super-important-caveats">Super important caveats</a></li>
 				</ul>
 
 				<h2><a id="getting-started" class="anchor" href="#getting-started" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Getting Started</h2>
 
-				<p>This template works by copying the contents of the <a href="https://github.com/jtsternberg/wp-lib-loader/blob/master/loader.php"><code>loader.php</code></a> file completing a five-step find and replace on the file. For example, if your lbrary is named <strong><em>WP_Magic</em></strong>:</p>
+				<p>This template works by copying the contents of the <a href="https://github.com/jtsternberg/wp-lib-loader/blob/master/loader.php"><code>loader.php</code></a> file, and completing a five-step find and replace on the file. For example, if your library is named <strong><em>WP_Magic</em></strong>:</p>
 
 				<ol>
-					<li>Search for <code>LIBCLASSNAME</code> and replace with your library's class-name: <code>WP_Magic</code>.</li>
-					<li>Search for <code>LIBNAMEUPPER</code> and replace with your library's class-name, upppercased (for constants): <code>WP_MAGIC</code>.</li>
-					<li>Search for <code>LIBNAMELOWER</code> and replace with your library's class-name, lowercased (for hook names): <code>wp_magic</code>.</li>
-					<li>Search for <code>LIBURL</code> and replace with your library's URL: <code>https://wp_magic.io</code>.</li>
-					<li>Search for <code>AUTHORNAME</code> and replace with your name: <code>John Doe</code>.</li>
-					<li>Search for <code>AUTHOREMAIL</code> and replace with your email: <code>john@johndoe.com</code>.</li>
+					<li>Searches for <code>LIBCLASSNAME</code> and replaces with your library's class-name: <code>WP_Magic</code>.</li>
+					<li>Searches for <code>LIBNAMEUPPER</code> and replaces with your library's class-name, upppercased (for constants): <code>WP_MAGIC</code>.</li>
+					<li>Searches for <code>LIBNAMELOWER</code> and replacse with your library's class-name, lowercased (for hook names): <code>wp_magic</code>.</li>
+					<li>Searches for <code>LIBURL</code> and replaces with your library's URL: <code>https://wp_magic.io</code>.</li>
+					<li>Searches for <code>AUTHORNAME</code> and replaces with your name: <code>John Doe</code>.</li>
+					<li>Searches for <code>AUTHOREMAIL</code> and replaces with your email: <code>john@johndoe.com</code>.</li>
 				</ol>
 
 				<h4><a id="the-resulting-file" class="anchor" href="#the-resulting-file" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>The resulting file:</h4>
@@ -72,7 +72,7 @@
 
 				<h2><a id="how-to-version-your-library" class="anchor" href="#how-to-version-your-library" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to version your library</h2>
 
-				<p>Since the real magic of this loader is when you release a new version, let me explain that process. Let's say you're looking to release a bug-fix for <strong><em>WP_Magic</em></strong>.</p>
+				<p>Since the real magic of this loader is when you release a new version, let's walk through that process. Let's say you're looking to release a bug-fix for <strong><em>WP_Magic</em></strong>.</p>
 
 				<ol>
 					<li>
@@ -105,10 +105,11 @@
 
 				<p><a href="https://github.com/jtsternberg/wp-lib-loader/blob/master/examples/wp-magic-version-011.php">examples/wp-magic-version-011.php</a></p>
 
-				<h2><a id="addtional-details" class="anchor" href="#addtional-details" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Addtional details</h2>
+				<h2><a id="additional-details" class="anchor" href="#additional-details" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Additional details</h2>
 
 				<ul>
-					<li><p>The loader assumes your main library class (e.g. <code>WP_Magic</code>) exists in the <code>lib/init.php</code> file. Obviously, if that is not the case with your library, you will need to updat the <code>require_once</code> line.</p></li>
+					<li><p>The loader assumes your main library class (e.g. <code>WP_Magic</code>) exists in the <code>lib/init.php</code> file. Obviously, if that is not the case with your library, you will need to update the <code>require_once</code> line.</p></li>
+					<li><p>Along those lines, this class can be modified/added to if desired, but the core functionality needs to remain.</p></li>
 					<li>
 						<p>The loader provides 3 useful constants:</p>
 
@@ -122,8 +123,10 @@
 						<p>The loader provides a useful hook, <code>'LIBNAMELOWER_load'</code> (e.g. <code>'wp_magic_load'</code>), which can be used for hooking in your dependent functionality. In order to ensure your hook loads <em>after</em> the library is loaded, you will need to use the <code>LIBNAMEUPPER_LOADED</code> (e.g. <code>WP_MAGIC_LOADED</code>) constant when hooking in:</p>
 
 <div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-k">if</span> ( <span class="pl-c1">defined</span>( <span class="pl-s"><span class="pl-pds">'</span>WP_MAGIC_LOADED<span class="pl-pds">'</span></span> ) ) {</span>
-<span class="pl-s1">  <span class="pl-c">// Hook in after WP_Magic and add our functionality</span></span>
-<span class="pl-s1">  add_action( <span class="pl-s"><span class="pl-pds">'</span>wp_magic_load<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>my_plugin_dependent_functionality<span class="pl-pds">'</span></span>, ( <span class="pl-c1">WP_MAGIC_LOADED</span> <span class="pl-k">+</span> <span class="pl-c1">1</span> ) );</span>
+<br><span class="pl-s1">  <span class="pl-c">// Need to hook AFTER the lib.</span></span>
+<span class="pl-s1">  <span class="pl-smi">$priority</span> <span class="pl-k">=</span> ( <span class="pl-c1">WP_MAGIC_LOADED</span> <span class="pl-k">+</span> <span class="pl-c1">1</span> );</span>
+<br><span class="pl-s1">  <span class="pl-c">// And add our functionality.</span></span>
+<span class="pl-s1">  add_action( <span class="pl-s"><span class="pl-pds">'</span>wp_magic_load<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>plugin_dependent_function<span class="pl-pds">'</span></span>, <span class="pl-smi">$priority</span> );</span>
 <span class="pl-s1">}</span></pre></div>
 					</li>
 				</ul>
@@ -131,7 +134,7 @@
 				<h2><a id="super-important-caveats" class="anchor" href="#super-important-caveats" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Super important caveats</h2>
 
 				<ul>
-					<li><p>This loader only works if you are <strong>100% committed to backwards-compatibility</strong> (like WordPress). This is mandataory because only <em>one</em> instance of the library will be loaded, and will be whichever instance is the most recent (version). If you change a function, hook name, or properties passed into your library hooks, there is a very real chance you will break the plugins/themes which depend on your library. For this reason, you need to take great consideration when developing your public API, i.e. the parts of the library to be exposed for use.</p></li>
+					<li><p>This loader only works if you are <strong>100% committed to backwards-compatibility</strong> (like WordPress). This is mandatory because only <em>one</em> instance of the library will be loaded, and will be whichever instance is the most recent (version). If you change a function, hook name, or properties passed into your library hooks, there is a very real chance you will break the plugins/themes which depend on your library. For this reason, you need to take great consideration when developing your public API, i.e. the parts of the library to be exposed for use.</p></li>
 					<li><p>When releasing a new version, it's extremely important to follow <a href="#how-to-version-your-library">the versioning instructions</a> or this loader will be useless.</p></li>
 				</ul>
 
@@ -140,6 +143,7 @@
 				<ul>
 					<li><a href="https://github.com/WebDevStudios/CMB2-User-Select/blob/master/cmb2-user-select.php">CMB2-User-Select</a></li>
 					<li><a href="https://github.com/WebDevStudios/CMB2-Post-Search-field/blob/master/cmb2_post_search_field.php">CMB2 Post Search field</a></li>
+					<li><a href="https://github.com/WebDevStudios/cmb2-attached-posts">CMB2 Attached Posts Field</a></li>
 					<li><a href="https://twitter.com/intent/tweet?text=%40jtsternberg%20I%27m%20using%20WP%20Lib%20Loader!&source=webclient" target="_blank">&#8230; Add yours!</a></li>
 				</ul>
 
