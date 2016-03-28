@@ -10,7 +10,7 @@
  * @copyright 2016 John Doe <john@johndoe.com>
  * @license   GPL-2.0+
  * @version   0.1.0
- * @link      https://wp_magic.io
+ * @link      https://wp-magic.io
  * @since     0.1.0
  */
 
@@ -33,7 +33,7 @@
  */
 
 /**
- * Loader versioning: https://github.com/jtsternberg/wp-lib-loader
+ * Loader versioning: http://jtsternberg.github.io/wp-lib-loader/
  */
 
 if ( ! class_exists( 'WP_Magic_010', false ) ) {
@@ -48,7 +48,7 @@ if ( ! class_exists( 'WP_Magic_010', false ) ) {
 	 * @author   John Doe <john@johndoe.com>
 	 * @license  GPL-2.0+
 	 * @version  0.1.0
-	 * @link     https://wp_magic.io
+	 * @link     https://wp-magic.io
 	 * @since    0.1.0
 	 */
 	class WP_Magic_010 {
@@ -95,8 +95,25 @@ if ( ! class_exists( 'WP_Magic_010', false ) ) {
 			// Use the hook system to ensure only the newest version is loaded.
 			add_action( 'wp_magic_load', array( $this, 'include_lib' ), self::PRIORITY );
 
-			// Then fire our hook.
-			do_action( 'wp_magic_load' );
+			/*
+			 * Hook in to the first hook we have available and
+			 * fire our `wp_magic_load' hook.
+			 */
+			add_action( 'muplugins_loaded', array( __CLASS__, 'fire_hook' ), 9 );
+			add_action( 'plugins_loaded', array( __CLASS__, 'fire_hook' ), 9 );
+			add_action( 'after_setup_theme', array( __CLASS__, 'fire_hook' ), 9 );
+		}
+
+		/**
+		 * Fires the wp_magic_load action hook.
+		 *
+		 * @since 0.1.0
+		 */
+		public static function fire_hook() {
+			if ( ! did_action( 'wp_magic_load' ) ) {
+				// Then fire our hook.
+				do_action( 'wp_magic_load' );
+			}
 		}
 
 		/**
