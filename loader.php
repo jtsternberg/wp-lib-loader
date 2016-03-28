@@ -96,21 +96,24 @@ if ( ! class_exists( 'LIBCLASSNAME_010', false ) ) {
 			add_action( 'LIBNAMELOWER_load', array( $this, 'include_lib' ), self::PRIORITY );
 
 			/*
-			 * Hook in to after_setup_theme, the first available hook
-			 * to all plugins/themes
+			 * Hook in to the first hook we have available and
+			 * fire our `LIBNAMELOWER_load' hook.
 			 */
-			add_action( 'after_setup_theme', array( $this, 'do_hook' ) );
+			add_action( 'muplugins_loaded', array( __CLASS__, 'fire_hook' ), 9 );
+			add_action( 'plugins_loaded', array( __CLASS__, 'fire_hook' ), 9 );
+			add_action( 'after_setup_theme', array( __CLASS__, 'fire_hook' ), 9 );
 		}
 
 		/**
-		 * Fires the LIBNAMELOWER_load action hook
-		 * (from the after_setup_theme hook).
+		 * Fires the LIBNAMELOWER_load action hook.
 		 *
 		 * @since 0.1.0
 		 */
-		public function do_hook() {
-			// Then fire our hook.
-			do_action( 'LIBNAMELOWER_load' );
+		public static function fire_hook() {
+			if ( ! did_action( 'LIBNAMELOWER_load' ) ) {
+				// Then fire our hook.
+				do_action( 'LIBNAMELOWER_load' );
+			}
 		}
 
 		/**
