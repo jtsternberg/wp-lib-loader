@@ -1,0 +1,24 @@
+{
+	"name": "wp-lib-loader",
+	"title": "WP Lib Loader",
+	"version": "0.1.0",
+	"description": "Utility template class for smartly loading WordPress code libraries.",
+	"main": "Gruntfile.js",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/jtsternberg/wp-lib-loader"
+	},
+	"author": {
+		"name": "Justin Sternberg",
+		"url": "http://dsgnwrks.pro"
+	},
+	"homepage": "https://github.com/jtsternberg/wp-lib-loader",
+	"license": "GPLv2",
+	"devDependencies": {
+		"grunt": "latest",
+		"grunt-contrib-copy": "latest",
+		"grunt-text-replace": "latest",
+		"grunt-githooks": "~0.3.1",
+		"load-grunt-tasks": "latest"
+	}
+}
