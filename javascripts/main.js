@@ -6,7 +6,7 @@ window.WPLibLoader = window.WPLibLoader || {};
 	app.codeURL = 'https://raw.githubusercontent.com/jtsternberg/wp-lib-loader/master/loader.php?d=3-27-16';
 	app.button = '<a href="'+ app.codeURL +'" class="get-it button" download="loader.php">Generate Loader!</a>';
 	app.readmeURL = 'https://raw.githubusercontent.com/jtsternberg/wp-lib-loader/master/README.md?d=3-27-16';
-	app.readmeURL = 'http://test.it/Plugins&Scripts/wp-lib-loader/README.md';
+	app.readmeURL = 'https://github.com/jtsternberg/wp-lib-loader/blob/master/README.md';
 	app.code = '';
 
 	app.questions = {
