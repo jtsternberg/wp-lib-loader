@@ -6,6 +6,8 @@ This is a handy template class for generating smart loaders for your WordPress c
 
 It accomplishes this through a semi-magical use of the WordPress hooks system combined with unique loader class-names for each version of the library.
 
+See the background post: [Don’t Repeat Yourself. Use WP Lib Loader instead!](http://dsgnwrks.pro/plugins-and-scripts/dont-repeat-yourself-use-wp-lib-loader-instead/)
+
 #### [Use the generator tool](http://jtsternberg.github.io/wp-lib-loader/) to quickly create a loader for your library!
 
 - [Getting Started](#getting-started)
