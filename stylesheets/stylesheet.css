@@ -466,6 +466,11 @@ header h1 {
   letter-spacing: -1px;
 }
 
+header a, header a:hover, header a:visited {
+  color: #fff;
+  text-decoration: none;
+}
+
 header h2 {
   width: 450px;
   margin-top: 0;
