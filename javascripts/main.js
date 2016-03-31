@@ -104,7 +104,7 @@ window.WPLibLoader = window.WPLibLoader || {};
 		replacements.LIBNAMEUPPER = replacements.LIBCLASSNAME.toUpperCase();
 		replacements.LIBNAMELOWER = replacements.LIBCLASSNAME.toLowerCase();
 
-		var filename = replacements.LIBNAMELOWER.replace( '_', '-' ) + '.php';
+		var filename = replacements.LIBNAMELOWER.replace( new RegExp( '_', 'gm'), '-' ) + '.php';
 
 		app.download( filename, app.replace( app.code, replacements ) );
 
